@@ -12,6 +12,11 @@ class TeamcityController < ApplicationController
   end
 
   def index
-    @build_info = TeamCity.build_statistics(237)
+    @builds = TeamCity.builds[0..10]
+
+    @build_info = []
+
+    @builds.each do |build|
+    @build_info << TeamCity.build_statistics(build.id)[4].value
   end
 end
