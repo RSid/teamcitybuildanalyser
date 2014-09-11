@@ -3,9 +3,9 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-   root 'teamcity#index'
+   root 'build#index'
 
-   resources :teamcity, only: [:index]
+   resources :build, only: [:index, :show]
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

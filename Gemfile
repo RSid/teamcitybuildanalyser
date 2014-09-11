@@ -27,7 +27,7 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 gem 'spring',        group: :development
 
 gem 'teamcity-ruby-client'
-
+gem 'd3-rails'
 
 gem 'pry', group: :development
 

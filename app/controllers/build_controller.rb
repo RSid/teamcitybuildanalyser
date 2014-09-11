@@ -1,6 +1,6 @@
 require 'teamcity'
 
-class TeamcityController < ApplicationController
+class BuildController < ApplicationController
 
   # This only needs to be set once per Ruby execution.
   # You may use guestAuth instead of httpAuth and omit the use of http_user and http_password
@@ -12,13 +12,13 @@ class TeamcityController < ApplicationController
   end
 
   def index
-    @builds = TeamCity.builds[0..5]
+    @builds = TeamCity.builds[0..2]
 
     @build_info = []
 
     @builds.each do |build|
       if build.status=="SUCCESS"
-        @build_info << {build_id: build.id, build_status: build.status, build_time: ((TeamCity.build_statistics(build.id)[4].value.to_f/60000).round(4).to_s + " minutes")}
+        @build_info << {build_id: build.id, build_status: build.status, build_time: (TeamCity.build_statistics(build.id)[4].value.to_f/60000)}
       end
     end
 
