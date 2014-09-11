@@ -1,30 +1,29 @@
 <html>
-
-
-<br>
-<br>
-build info
-<%= @builds[0] %>
-
+<h1>Build Speed (minutes per build)</h1>
+<p>
+	Blame function coming soon!
+</p>
 <script type="text/javascript">
 
 			//Width and height
-			var w = 1000;
+			var w = 1100;
 			var h = 600;
 			var padding = 100;
 
       var dataset = [];
-      var xValues = []
+      var xValues = [];
+			var names = [];
+
 
       <% @build_info.each do |build| %>
-        dataset.push(<%= [ build[:build_id], build[:build_time] ] %>)
-        xValues.push(<%= build[:build_id] %>)
+        dataset.push(<%= [ build.id, build.time] %>);
+        xValues.push(<%= build.id %>);
       <% end %>
 
 			//Create scale functions
 			var xScale = d3.scale.ordinal()
 								 .domain(xValues)
-								 .rangePoints([100,1000],1);
+								 .rangePoints([100,1100],1);
 
 			var yScale = d3.scale.linear()
 								 .domain([30, 45])
@@ -73,7 +72,7 @@ build info
 			   .enter()
 			   .append("text")
 			   .text(function(d) {
-			   		return Math.round(d[1]) + " minutes" + " " + d[2];
+			   		return Math.round(d[1]) + " minutes";
 			   })
 			   .attr("x", function(d) {
 			   		return xScale(d[0]);
@@ -81,9 +80,16 @@ build info
 			   .attr("y", function(d) {
 			   		return yScale(d[1]);
 			   })
+            .attr("transform", function(d) {
+                return "rotate(60,"+ xScale(d[0]) +","+ yScale(d[1]) + ")"
+                })
 			   .attr("font-family", "sans-serif")
 			   .attr("font-size", "11px")
-			   .attr("fill", "red");
+			   .attr("fill", "red")
+				 .attr("class","datapoint")
+				 .attr("id",function(d) {
+						return Math.round(d[0]);
+				});
 
 
 			//Create X axis
