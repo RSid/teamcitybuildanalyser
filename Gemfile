@@ -27,6 +27,7 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 gem 'spring',        group: :development
 
 gem 'teamcity-ruby-client'
+gem 'bitbucket_rest_api'
 
 gem 'pry', group: :development
 
