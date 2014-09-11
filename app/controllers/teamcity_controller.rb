@@ -17,7 +17,9 @@ class TeamcityController < ApplicationController
     @build_info = []
 
     @builds.each do |build|
-      @build_info << {build_id: build.id, build_status: build.status, build_time: TeamCity.build_statistics(build.id)[4].value}
+      if build.status=="SUCCESS"
+        @build_info << {build_id: build.id, build_status: build.status, build_time: ((TeamCity.build_statistics(build.id)[4].value.to_f/60000).round(4).to_s + " minutes")}
+      end
     end
 
     @build_stats = TeamCity.build_statistics(@builds[0].id)
