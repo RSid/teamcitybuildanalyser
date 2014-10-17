@@ -14,7 +14,7 @@ build info
 			var padding = 100;
 
       var dataset = [];
-      var xValues = []
+      var xValues = [];
 
       <% @build_info.each do |build| %>
         dataset.push(<%= [ build[:build_id], build[:build_time] ] %>)
